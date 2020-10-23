@@ -5,13 +5,11 @@ using UnityEngine;
 public class HumanPlayer : PlayerBase
    
 {
-    public GameHandler gameHandler;
-    public Grid grid;
+    
     // Start is called before the first frame update
     void Start()
     {
-        grid = GetComponent<Grid>();
-        gameHandler = GetComponent<GameHandler>();
+       
         
     }
 
@@ -26,7 +24,7 @@ public class HumanPlayer : PlayerBase
     public void OnPlayerClick(Box box)
     {
 
-        if (GameHandler.currentPlayer!=this)  
+        if (GameHandler.currentPlayer!=this || GameHandler.gameOver)  
         {
             return;
         }
@@ -35,9 +33,9 @@ public class HumanPlayer : PlayerBase
             if (box.boxState == BoxState.Empty)
             {
 
-                
+
                 box.boxText.text = mySymbol.ToString();
-                
+
 
                 if (mySymbol == MySymbol.X)
                 {
@@ -50,7 +48,7 @@ public class HumanPlayer : PlayerBase
                     grid.UpdateGrid(box.boxIdentifier, BoxState.O);
                 }
 
-
+                grid.checkWin();
                 gameHandler.nextTurn();
             }
         }

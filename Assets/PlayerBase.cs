@@ -10,8 +10,14 @@ public enum MySymbol
 
 public class PlayerBase : MonoBehaviour
 {
-    
-
+	private void Awake()
+	{
+		grid = GetComponent<Grid>();
+		gameHandler = GetComponent<GameHandler>();
+	}
+	public Grid grid;
+    public GameHandler gameHandler;
     public MySymbol mySymbol;
     
 }
+
